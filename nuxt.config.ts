@@ -6,7 +6,7 @@ export default defineNuxtConfig({
   // },
   runtimeConfig: {
     public: {
-      apiBaseUrl: process.env.API_BASE_URL
+      apiBaseUrl: 'https://65a52ca152f07a8b4a3e815d.mockapi.io/'
     }
   },
   modules: ['@pinia/nuxt', '@nuxtjs/eslint-module', '@bg-dev/nuxt-naiveui', '@vueuse/nuxt'],
