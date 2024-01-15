@@ -24,9 +24,11 @@ useHead({
 })
 
 nextTick(async () => {
-  isLoading.value = true
-  await ticketsStore.fetchTickets()
-  isLoading.value = false
+  if (tiketsSerialized.value) {
+    isLoading.value = true
+    await ticketsStore.fetchTickets()
+    isLoading.value = false
+  }
 })
 
 const addressColumn = reactive<DataTableBaseColumn>({
