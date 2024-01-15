@@ -17,7 +17,7 @@ const ticketsStore = useTicketsStore()
 const { tiketsSerialized } = storeToRefs(ticketsStore)
 const isLoading = ref(false)
 const router = useRouter()
-const title = 'Мои тикеты'
+const title = 'Тикеты'
 
 useHead({
   title
@@ -71,7 +71,12 @@ const createColumns = ({
             },
             src: row.avatar,
             onClick: () => {
-              console.log('!')
+              router.push({
+                name: ERouteName.PAGE_ADMIN_PROFILE_ID,
+                params: {
+                  id: row.id
+                }
+              })
             }
           }
         )

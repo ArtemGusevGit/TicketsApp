@@ -24,7 +24,8 @@ export const useTicketsStore = defineStore('tickets', {
         id: state.tiket.id,
         ticket: state.tiket.ticket,
         header: state.tiket.header,
-        avatar: state.tiket.avatar
+        avatar: state.tiket.avatar,
+        fullName: state.tiket.fullName
       }
     }
 

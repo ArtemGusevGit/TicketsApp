@@ -3,5 +3,6 @@ export type TTickets = {
   id: string,
   ticket: string,
   header: string,
-  avatar: string
+  avatar: string,
+  fullName: string,
 }

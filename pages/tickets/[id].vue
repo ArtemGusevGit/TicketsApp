@@ -28,17 +28,8 @@ nextTick(async () => {
   >
     {{ tiketSerialized?.header }}
   </VBreadcrumb>
-  <VTitle>Тикет:</VTitle>
   <NSpace vertical>
-    <NSpace align="center">
-      <img
-        class="avatar-img"
-        :src="tiketSerialized?.avatar"
-        alt="avatar"
-      >
-      <VTitle>{{ tiketSerialized?.header }}</VTitle>
-    </NSpace>
-
+    <VTitle>Тикет: {{ tiketSerialized?.header }}</VTitle>
     <div>{{ tiketSerialized?.ticket }}</div>
     <NSpace justify="space-between">
       <div>id: {{ tiketSerialized?.id }}</div>
