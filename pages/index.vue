@@ -24,7 +24,7 @@ useHead({
 })
 
 nextTick(async () => {
-  if (tiketsSerialized.value) {
+  if (!tiketsSerialized.value) {
     isLoading.value = true
     await ticketsStore.fetchTickets()
     isLoading.value = false
