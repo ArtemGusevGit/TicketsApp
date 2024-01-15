@@ -1,6 +1,4 @@
 import type { UseFetchOptions } from 'nuxt/app'
-import { storeToRefs } from 'pinia'
-import { useAuthStore } from '~/stores/auth'
 
 export const useApiFetch = <T>(
   url: string,

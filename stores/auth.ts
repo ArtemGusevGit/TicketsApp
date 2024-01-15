@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { useCookie } from '#imports'
+import { ERouteName } from '~/shared/routes'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -30,9 +31,22 @@ export const useAuthStore = defineStore('auth', {
           throw new Error(message)
         }
       } catch (error) {
-        console.log(error)
         return Promise.reject(error)
       }
+    },
+
+    logout () {
+      const accessTokenCookie = useCookie('accessToken')
+      const userCookie = useCookie('user')
+      const router = useRouter()
+
+      this.accessToken = null
+      this.user = null
+
+      accessTokenCookie.value = null
+      userCookie.value = null
+
+      router.push({ name: ERouteName.PAGE_LOGIN })
     }
   }
 })

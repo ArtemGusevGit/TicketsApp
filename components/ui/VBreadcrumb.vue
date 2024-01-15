@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ERouteName } from '~/shared/constants/routes'
+import { ERouteName } from '~/shared/routes'
 
 type Props = {
   to: string | { name: ERouteName; params?: Record<string, string> },
@@ -33,7 +33,7 @@ const props = withDefaults(defineProps<Props>(), {
   align-items: center;
   display: flex;
   flex-wrap: nowrap;
-  margin: -1.5rem 0 1.2rem;
+  margin-bottom: 1rem;
 
   @include media-breakpoint-down(xs) {
     margin-bottom: 1.1rem;

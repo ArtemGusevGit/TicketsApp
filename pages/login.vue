@@ -20,7 +20,7 @@ definePageMeta({
 const router = useRouter()
 const authStore = useAuthStore()
 
-const { user, isAuthenticated } = storeToRefs(authStore)
+const { isAuthenticated } = storeToRefs(authStore)
 const isSubmitting = ref(false)
 
 const title = 'Вход в личный кабинет'
@@ -30,11 +30,13 @@ useHead({
   title
 })
 
-if (isAuthenticated.value) {
-  router.push({
-    name: ERouteName.PAGE_HOME
-  })
-}
+nextTick(() => {
+  if (isAuthenticated.value) {
+    router.push({
+      name: ERouteName.PAGE_HOME
+    })
+  }
+})
 
 const schema = yup.object({
   name: nameValidations,

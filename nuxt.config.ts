@@ -1,9 +1,9 @@
 import svgLoader from 'vite-svg-loader'
 
 export default defineNuxtConfig({
-  experimental: {
-    payloadExtraction: true
-  },
+  // experimental: {
+  //   payloadExtraction: true
+  // },
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.API_BASE_URL
