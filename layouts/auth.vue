@@ -1,6 +1,13 @@
 <template>
   <div class="auth-layout">
-    <slot />
+    <ClientOnly>
+      <template #fallback>
+        <div class="loader">
+          <NSpin />
+        </div>
+      </template>
+      <slot />
+    </ClientOnly>
   </div>
 </template>
 
@@ -9,5 +16,4 @@
   padding: 1.5rem;
   width: 100%;
 }
-
 </style>

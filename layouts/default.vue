@@ -110,13 +110,6 @@ const navLinks = [
   color: $primary;
 }
 
-.loader {
-  height: 90vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .icon {
   display: flex;
 }
