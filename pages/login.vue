@@ -6,7 +6,6 @@ import { useNotification } from 'naive-ui'
 import { storeToRefs } from 'pinia'
 import { definePageMeta } from '#imports'
 import VInput from '~/components/ui/VInput.vue'
-import VButton from '~/components/ui/VButton.vue'
 import { useAuthStore } from '~/stores/auth'
 import { ERouteName } from '~/shared/routes'
 import { NOTIFICATION_DURATION } from '~/shared/common'
@@ -53,6 +52,7 @@ const onSubmit = async (values, { resetForm }) => {
       password
     }
     await authStore.login(payload)
+    await authStore.fetchUserData()
     await router.push({
       name: ERouteName.PAGE_HOME
     })
@@ -98,7 +98,7 @@ const onSubmit = async (values, { resetForm }) => {
         />
       </div>
       <div class="actions">
-        <VButton
+        <NButton
           type="primary"
           attr-type="submit"
           size="medium"
@@ -106,22 +106,16 @@ const onSubmit = async (values, { resetForm }) => {
           :disabled="isSubmitting"
         >
           Войти
-        </VButton>
+        </NButton>
       </div>
     </form>
   </VeeForm>
 </template>
 
 <style scoped lang="scss">
-.forgot-password {
-  color: $primary;
-  font-weight: 300;
-}
-
 .actions {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   margin-top: 2rem;
 }
 </style>

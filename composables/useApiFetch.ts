@@ -5,8 +5,6 @@ export const useApiFetch = <T>(
   options: UseFetchOptions<T> = {}
 ): any => {
   const config = useRuntimeConfig()
-  // const { accessToken } = storeToRefs(useAuthStore())
-
   options.baseURL = config.public.apiBaseUrl
   options.key = url
 
@@ -24,7 +22,7 @@ export const useApiFetch = <T>(
       response: any
     }) => {
       if (response.status === 401) {
-        // logic to refers token
+        // logic to refresh token
       }
     }
   })

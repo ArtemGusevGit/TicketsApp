@@ -1,34 +1,65 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
 import { ERouteName } from '~/shared/routes'
-import VButton from '~/components/ui/VButton.vue'
 import { useAuthStore } from '~/stores/auth'
+import ticketsIcon from '~/assets/icons/tickets-icon.svg'
+import profileIcon from '~/assets/icons/profile-icon.svg'
 
 const authStore = useAuthStore()
+const { user } = storeToRefs(authStore)
+
+const navLinks = [
+  {
+    name: ERouteName.PAGE_ADMIN_TICKETS,
+    text: 'Тикеты',
+    icon: ticketsIcon
+  },
+  {
+    name: ERouteName.PAGE_ADMIN_PROFILE,
+    text: 'Профиль',
+    icon: profileIcon
+  }
+]
 </script>
 
 <template>
   <div class="app__main">
     <div class="main-nav">
       <div class="main-nav__links">
-        <NuxtLink
-          class="main-nav__link"
-          :to="{name: ERouteName.PAGE_HOME}"
+        <NSpace
+          vertical
+          align="center"
         >
-          Тикеты
-        </NuxtLink>
+          <img
+            class="user-img"
+            :src="user?.avatar"
+            alt="userLogo"
+          >
+          <div>{{ user?.fullName }}</div>
+        </NSpace>
         <NuxtLink
+          v-for="(link, index) in navLinks"
+          :key="index"
+          :to="{name: link.name}"
           class="main-nav__link"
-          :to="{name: ERouteName.PAGE_ADMIN_PROFILE}"
         >
-          Профиль
+          <NSpace align="center">
+            <NIcon
+              class="icon"
+              :component="link.icon"
+            />
+            <span>
+              {{ link.text }}
+            </span>
+          </NSpace>
         </NuxtLink>
       </div>
-      <VButton
+      <NButton
         type="primary"
         @click="authStore.logout"
       >
         Выход
-      </VButton>
+      </NButton>
     </div>
 
     <div class="main-content">
@@ -84,5 +115,13 @@ const authStore = useAuthStore()
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.icon {
+  display: flex;
+}
+
+.user-img {
+  border-radius: 100%;
 }
 </style>

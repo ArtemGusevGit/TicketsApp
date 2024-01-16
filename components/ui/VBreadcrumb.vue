@@ -1,3 +1,4 @@
+<!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <script setup lang="ts">
 import { ERouteName } from '~/shared/routes'
 
@@ -34,11 +35,6 @@ const props = withDefaults(defineProps<Props>(), {
   display: flex;
   flex-wrap: nowrap;
   margin-bottom: 1rem;
-
-  @include media-breakpoint-down(xs) {
-    margin-bottom: 1.1rem;
-    margin-top: 0;
-  }
 }
 
 .breadcrumb__link {
@@ -59,11 +55,6 @@ const props = withDefaults(defineProps<Props>(), {
 .breadcrumb__separator {
   color: #767c82;
   margin: 0 1rem;
-
-  @include media-breakpoint-down(xl) {
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-  }
 }
 
 .breadcrumb__text {

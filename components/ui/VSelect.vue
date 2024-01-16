@@ -1,33 +1,29 @@
 <script setup lang="ts">
 import { useField } from 'vee-validate'
-import { NInput } from 'naive-ui'
+import { NSelect } from 'naive-ui'
 
-type TInputSizes = 'tiny' | 'small' | 'medium' | 'large'
-type TInputTypes = 'password' | 'text'
+type TSizes = 'tiny' | 'small' | 'medium' | 'large'
 
 type Props = {
   name: string
   label?: string
+  options?: { label: string; value: string | number }[]
   placeholder?: string
-  type?: TInputTypes
-  size?: TInputSizes
-  rounded?: boolean
+  size?: TSizes
   disabled?: boolean
   required?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
   label: '',
+  options: () => [],
   placeholder: '',
-  type: 'text',
   size: 'large',
-  rounded: false,
   disabled: false,
   required: false
 })
 
 const { value, meta, errors } = useField<string>(() => props.name)
-
 </script>
 
 <template>
@@ -40,28 +36,19 @@ const { value, meta, errors } = useField<string>(() => props.name)
     >
       {{ label }}
     </label>
-    <NInput
+    <NSelect
       v-model:value="value"
-      :type="type"
       :size="size"
+      :options="options"
       :placeholder="placeholder"
       :disabled="disabled"
       :status="meta.touched && !meta.valid ? 'error' : 'success'"
     />
-    <span class="error-message">{{ errors?.join(', ') }}</span>
-    <div
-      v-if="$slots.extra"
-      class="v-input__extra"
-    >
-      <slot name="extra" />
-    </div>
+    <span class="error-message">{{ errors?.toString() }}</span>
   </div>
 </template>
 
 <style scoped lang="scss">
-.v-input__extra {
-  margin-top: 0.25rem;
-}
 
 .error-message {
   color: #ff3b30;
@@ -92,20 +79,8 @@ label.required {
 .form-field {
   margin-bottom: 1rem;
   position: relative;
-
-  label {
-    display: inline-block;
-  }
-}
-
-.form-field.is-horizontal {
-  align-items: center;
   display: flex;
-
-  label {
-    display: inline;
-    flex-basis: 40%;
-    margin-bottom: 0;
-  }
+  flex-direction: column;
 }
+
 </style>

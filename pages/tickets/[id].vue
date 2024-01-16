@@ -14,6 +14,11 @@ definePageMeta({
 const router = useRouter()
 const ticketStore = useTicketsStore()
 const { tiketSerialized } = storeToRefs(ticketStore)
+const title = 'Тикет'
+
+useHead({
+  title
+})
 
 nextTick(async () => {
   const { id: ticketId } = router.currentRoute.value.params
@@ -29,7 +34,7 @@ nextTick(async () => {
     {{ tiketSerialized?.header }}
   </VBreadcrumb>
   <NSpace vertical>
-    <VTitle>Тикет: {{ tiketSerialized?.header }}</VTitle>
+    <VTitle>{{ title }}: {{ tiketSerialized?.header }}</VTitle>
     <div>{{ tiketSerialized?.ticket }}</div>
     <NSpace justify="space-between">
       <div>id: {{ tiketSerialized?.id }}</div>
@@ -37,9 +42,3 @@ nextTick(async () => {
     </NSpace>
   </NSpace>
 </template>
-
-<style lang="scss" scoped>
-.avatar-img {
-  border-radius: 100%;
-}
-</style>

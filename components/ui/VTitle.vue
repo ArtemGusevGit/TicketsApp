@@ -10,8 +10,5 @@
   font-size: 2rem;
   margin: 0;
 
-  @include media-breakpoint-down(xl) {
-    font-size: 1.5rem;
-  }
 }
 </style>

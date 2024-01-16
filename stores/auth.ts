@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
-import { useCookie } from '#imports'
 import { ERouteName } from '~/shared/routes'
+import type { TUser } from '~/types/auth'
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     accessToken: useCookie('accessToken'),
-    user: useCookie('user')
+    user: useCookie<null | TUser>('user')
   }),
 
   getters: {
@@ -19,19 +19,53 @@ export const useAuthStore = defineStore('auth', {
       try {
         if (payload.name === 'admin' && payload.password === 'admin') {
           const accessTokenCookie = useCookie('accessToken') as any
-          const userCookie = useCookie('user') as any
 
           accessTokenCookie.value = 'AccessToket'
           this.accessToken = 'AccessToket'
-
-          userCookie.value = 'admin'
-          this.user = 'admin'
         } else {
           const message = 'Неверный логин или пароль!'
           throw new Error(message)
         }
       } catch (error) {
         return Promise.reject(error)
+      }
+    },
+
+    async fetchUserData () {
+      try {
+        const {
+          data,
+          error
+        } =
+        await useApiFetch('my_profile/', {
+          method: 'GET'
+        })
+
+        const userCookie = useCookie('user') as any
+
+        userCookie.value = data.value[0]
+        this.user = data.value[0]
+
+        if (error.value) {
+          throw new Error(error.value.data.message)
+        }
+      } catch (error) {
+        return error
+      }
+    },
+
+    async editUserData (id: string, payload: {city:string, birthDate: string|null}) {
+      try {
+        const { error } = await useApiFetch(`my_profile/${id}`, {
+          method: 'PUT',
+          body: payload
+        })
+
+        if (error.value) {
+          throw new Error(error.value.data.message)
+        }
+      } catch (error) {
+        return error
       }
     },
 
