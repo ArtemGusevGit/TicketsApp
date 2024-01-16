@@ -79,7 +79,7 @@ const onSubmit = async (values, { resetForm }) => {
     as="div"
     class="auth-login"
   >
-    <form @submit="handleSubmit($event, onSubmit)">
+    <NForm @submit="handleSubmit($event, onSubmit)">
       <div class="form-fields">
         <VInput
           size="medium"
@@ -108,7 +108,7 @@ const onSubmit = async (values, { resetForm }) => {
           Войти
         </NButton>
       </div>
-    </form>
+    </NForm>
   </VeeForm>
 </template>
 
